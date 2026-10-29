@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0",
+  "description": "Synthetic-only secret detection test ground truth. All values are nonfunctional.",
+  "expected_secret_count": 2,
+  "expected_false_positive_count": 0,
+  "findings": [
+    {
+      "id": "SYNTH-001",
+      "file": "fixtures/api_key.py",
+      "line": 2,
+      "variable": "TEST_API_KEY",
+      "expected_rule_family": "generic_api_key",
+      "expected_detection": true,
+      "synthetic": true
+    },
+    {
+      "id": "SYNTH-002",
+      "file": "fixtures/access_token.js",
+      "line": 2,
+      "variable": "TEST_ACCESS_TOKEN",
+      "expected_rule_family": "generic_access_token",
+      "expected_detection": true,
+      "synthetic": true
+    }
+  ],
+  "negative_controls": [
+    {
+      "id": "NEG-001",
+      "file": "fixtures/negative_controls.py",
+      "line": 2,
+      "case": "ordinary value",
+      "value": "xyz",
+      "expected_detection": false
+    },
+    {
+      "id": "NEG-002",
+      "file": "fixtures/negative_controls.py",
+      "line": 3,
+      "case": "placeholder",
+      "value": "test123",
+      "expected_detection": false
+    },
+    {
+      "id": "NEG-003",
+      "file": "fixtures/negative_controls.py",
+      "line": 4,
+      "case": "dictionary word",
+      "value": "asianconstablebutterfly",
+      "expected_detection": false
+    },
+    {
+      "id": "NEG-004",
+      "file": "fixtures/negative_controls.py",
+      "line": 6,
+      "case": "environment reference",
+      "value": "os.getenv(API_KEY)",
+      "expected_detection": false
+    },
+    {
+      "id": "NEG-005",
+      "file": "fixtures/negative_controls.py",
+      "line": 7,
+      "case": "masked placeholder",
+      "value": "****REDACTED****",
+      "expected_detection": false
+    }
+  ]
+}

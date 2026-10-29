@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+node_modules/
+*.json.report
+myscan-lab.json
+myscan-lab.sarif

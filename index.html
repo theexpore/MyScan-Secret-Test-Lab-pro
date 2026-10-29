@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#10131c">
+<title>Sentinel · Secret Detection Lab</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <a class="brand" href="#"><span class="brand-icon">S</span><span><b>sentinel</b><small>SECURITY WORKSPACE</small></span></a>
+    <div class="workspace"><span class="workspace-icon">M</span><span><b>MyScan Validation</b><small>Local workspace</small></span><span class="chevron">⌄</span></div>
+    <div class="nav-label">WORKSPACE</div>
+    <a class="nav active" href="#overview"><span class="nav-ico">◫</span> Overview</a>
+    <a class="nav" href="#findings"><span class="nav-ico">⌕</span> Secret findings <span class="count">2</span></a>
+    <a class="nav" href="#fixtures"><span class="nav-ico">▤</span> Test fixtures</a>
+    <a class="nav" href="#reports"><span class="nav-ico">↗</span> Reports</a>
+    <div class="nav-label tools-label">TOOLS</div>
+    <a class="nav" href="#how-it-works"><span class="nav-ico">⌘</span> How testing works</a>
+    <div class="sidebar-footer"><div class="online"><i></i> Local-only mode</div><p>Fixtures stay on this device.<br>No credentials are sent anywhere.</p><div class="user"><div class="avatar">MS</div><span><b>MyScan Lab</b><small>Security engineering</small></span><span class="dots">···</span></div></div>
+  </aside>
+  <main class="main" id="overview">
+    <header class="topbar"><div class="crumb">Workspace <span>/</span> Secret detection lab</div><div class="top-actions"><span class="safe-badge"><i></i> SAFE FIXTURES</span><button id="exportGroundTruth" class="button secondary">↓ Export ground truth</button></div></header>
+    <section class="page-heading"><div><div class="eyebrow">VALIDATION CENTER <span>·</span> LAB 001</div><h1>Secret detection</h1><p>Measure what your scanner catches — and what it should ignore.</p></div><div class="run-meta"><span class="live-dot"></span><div><b>Test environment ready</b><small>2 positive · 5 negative cases</small></div></div></section>
+    <section class="hero">
+      <div class="hero-content"><div class="hero-chip"><span>✳</span> DETECTION QUALITY SUITE</div><h2>Trust every finding.<br><em>Verify every signal.</em></h2><p>A controlled fixture set to evaluate secret detection precision, recall, and noise — without using live credentials.</p><div class="hero-actions"><button class="button primary" id="runDemo"><span class="play">▶</span> Run local fixture test</button><span class="duration">◷ &nbsp;Instant · Runs in your browser</span></div></div>
+      <div class="visual" aria-hidden="true"><div class="ring ring1"></div><div class="ring ring2"></div><div class="ring ring3"></div><div class="core"><div class="core-shield">✓</div><small>TEST ENGINE</small></div><div class="orbit-tag ot1"><span class="mini-dot green"></span> 2 planted secrets</div><div class="orbit-tag ot2"><span class="mini-dot violet"></span> 5 negative controls</div><div class="orbit-tag ot3">⛨ &nbsp; No live keys</div></div>
+    </section>
+    <section class="metric-grid">
+      <article class="metric"><div class="metric-label">PLANTED SECRETS <span class="metric-icon violet-bg">⌘</span></div><div class="metric-number">02 <span class="metric-unit">fixtures</span></div><div class="metric-foot"><span class="bullet violet-b"></span> Ground-truth positives</div></article>
+      <article class="metric"><div class="metric-label">DETECTED <span class="metric-icon green-bg">✓</span></div><div class="metric-number" id="detected">— <span class="metric-unit">of 2 expected</span></div><div class="metric-foot" id="detectedFoot">Run a test to evaluate</div></article>
+      <article class="metric"><div class="metric-label">FALSE POSITIVES <span class="metric-icon amber-bg">!</span></div><div class="metric-number" id="falsePositives">— <span class="metric-unit">findings</span></div><div class="metric-foot">Negative controls incorrectly flagged</div></article>
+      <article class="metric"><div class="metric-label">RECALL <span class="metric-icon blue-bg">↗</span></div><div class="metric-number" id="recall">— <span class="metric-unit">%</span></div><div class="metric-foot">Planted secrets detected</div></article>
+    </section>
+    <section class="content-grid">
+      <section class="panel findings-panel" id="findings"><div class="panel-head"><div><div class="eyebrow">GROUND TRUTH</div><h3>Expected secret findings</h3><p>Only masked values are displayed in this workspace.</p></div><span class="tag neutral" id="runStatus">NOT RUN</span></div>
+        <div class="findings-list">
+          <article class="finding"><div class="finding-mark high-mark">!</div><div class="finding-main"><div class="finding-title">Generic API key <span class="tag high">HIGH</span></div><div class="finding-meta"><code>fixtures/api_key.py:2</code><span>·</span><span>TEST_API_KEY</span></div><div class="secret-mask">mscan_dummy_••••••••••••••</div></div><span class="finding-state pending" id="state1">Pending</span></article>
+          <article class="finding"><div class="finding-mark high-mark">!</div><div class="finding-main"><div class="finding-title">Access token <span class="tag high">HIGH</span></div><div class="finding-meta"><code>fixtures/access_token.js:2</code><span>·</span><span>TEST_ACCESS_TOKEN</span></div><div class="secret-mask">mscan_token_••••••••••••••</div></div><span class="finding-state pending" id="state2">Pending</span></article>
+        </div>
+        <div class="panel-foot"><span class="foot-shield">✓</span> Expected detections are based on the ground-truth manifest, not a real scanner run.</div>
+      </section>
+      <section class="panel quality-panel"><div class="panel-head"><div><div class="eyebrow">QUALITY SIGNAL</div><h3>Fixture test result</h3><p>Browser-side manifest comparison</p></div><span class="quality-icon">◈</span></div><div class="quality-score"><div class="score-ring" id="scoreRing"><div><b id="score">—</b><small>QUALITY</small></div></div><div class="score-copy"><b id="scoreTitle">Ready to test</b><p id="scoreDesc">Run the local fixture check to verify the manifest and case coverage.</p></div></div><div class="quality-breakdown"><div><span><i class="legend green-legend"></i>Positive cases</span><b id="positiveSummary">0 / 2</b></div><div><span><i class="legend amber-legend"></i>Negative cases</span><b id="negativeSummary">0 / 5</b></div><div><span><i class="legend blue-legend"></i>Manifest integrity</span><b id="manifestSummary">Not checked</b></div></div><button id="reset" class="button secondary full">Reset test state</button></section>
+    </section>
+    <section class="panel fixtures-panel" id="fixtures"><div class="panel-head"><div><div class="eyebrow">TEST COVERAGE</div><h3>Negative controls</h3><p>These common lookalikes should not be reported as exposed credentials.</p></div><span class="tag neutral">5 CASES</span></div>
+      <div class="fixture-grid">
+        <div class="fixture"><div class="fixture-file">PY</div><div><b>Ordinary value</b><code>api_key = "xyz"</code></div><span class="case-state">Expected clean</span></div>
+        <div class="fixture"><div class="fixture-file">PY</div><div><b>Placeholder</b><code>token = "test123"</code></div><span class="case-state">Expected clean</span></div>
+        <div class="fixture"><div class="fixture-file">PY</div><div><b>Dictionary word</b><code>"asianconstablebutterfly"</code></div><span class="case-state">Expected clean</span></div>
+        <div class="fixture"><div class="fixture-file">PY</div><div><b>Environment reference</b><code>os.getenv("API_KEY")</code></div><span class="case-state">Expected clean</span></div>
+        <div class="fixture"><div class="fixture-file">TXT</div><div><b>Masked placeholder</b><code>"****REDACTED****"</code></div><span class="case-state">Expected clean</span></div>
+      </div>
+    </section>
+    <section class="panel report-panel" id="reports"><div class="panel-head"><div><div class="eyebrow">EXPORTS</div><h3>Test artifacts</h3><p>Download ground truth and a local demo result.</p></div></div><div class="export-row"><div class="export-file"><span class="file-badge json">JSON</span><div><b>Ground-truth manifest</b><small>2 positives · 5 negative controls</small></div></div><button class="button secondary" id="downloadManifest">Download JSON ↓</button></div><div class="export-row"><div class="export-file"><span class="file-badge report">LOG</span><div><b>Browser demo results</b><small>Generated when the local fixture test runs</small></div></div><button class="button secondary" id="downloadResult" disabled>Download results ↓</button></div><p class="report-note">This demo validates fixture/manifest consistency. It does not invoke MyScan or claim that the scanner detected the secrets. Use the README to run the actual CLI and compare its JSON/SARIF output.</p></section>
+    <section class="panel how-panel" id="how-it-works"><div class="panel-head"><div><div class="eyebrow">VALIDATION METHOD</div><h3>How to use this lab</h3></div></div><div class="steps"><div><span>01</span><b>Check fixture integrity</b><p>Run the browser-side test to verify that all seven test cases are present in the ground-truth manifest.</p></div><div><span>02</span><b>Run MyScan locally</b><p>Scan this directory using your installed CLI. Export reports outside the fixture folder.</p></div><div><span>03</span><b>Compare actual results</b><p>Match report findings to expected file paths and lines. Count true positives, false positives, and missed secrets.</p></div></div></section>
+    <footer><span class="footer-brand">S</span> SENTINEL SECRET TEST LAB <span class="footer-sep">/</span> LOCAL FIXTURES ONLY <span class="footer-right">BUILD 1.1.0</span></footer>
+  </main>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="app.js"></script>
+</body></html>
